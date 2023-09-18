@@ -2,18 +2,35 @@ library(ggplot2)
 library(ggfortify)
 
 # Read Data
-laca_metab <- readxl::read_excel("C:/Users/Marcelo/Downloads/Metabolic screening LaCa collection - 230823.xlsx", sheet = "Tabelle1")
-
-laca_metab <- readxl::read_excel("C:/Users/Marcelo/OneDrive - UT Cloud/Metabolic screening LaCa collection - 230823.xlsx", sheet = "Tabelle2")
+# Only 10 species: "A. octavius", "C. accolens", "C. propinquum", "C. pseudodiphtericum", "C. tuberculosteraicum"
+# "C. acnes", "C. granolosum", "D. pigrum", "S. aureus", "S. epidermidis", "S. lugdunensis
+laca_metab <- readxl::read_excel("C:/Users/Marcelo/OneDrive - UT Cloud/1_Postdoc Tü/Sci/NoseSynComProject/LaCa_data/Metabolic_screening_LaCa_collection_230823.xlsx", sheet = "Tabelle1")
+# 10 species + "C. avidum"
+laca_metab <- readxl::read_excel("C:/Users/Marcelo/OneDrive - UT Cloud/1_Postdoc Tü/Sci/NoseSynComProject/LaCa_data/Metabolic_screening_LaCa_collection_230823.xlsx", sheet = "Tabelle2")
 
 # Remove the rows with missing values.
-laca_metab2 <- na.omit(laca_metab[,5:16])
+laca_metab <- na.omit(laca_metab)
+
+
+# Run to select only "Growth" variables.
+laca_metab2 <- dplyr::select(laca_metab, "Strain number", "Species", "name", dplyr::contains("Growth"))
+# Select quantitative variables for PCA
+laca_metab_q <- laca_metab2[,4:8]
+
+# Run to select only "Activities" variables.
+laca_metab2 <- dplyr::select(laca_metab, -dplyr::contains("Growth"))
+# Select quantitative variables for PCA
+laca_metab_q <- laca_metab2[,5:11]
+
+
+# Run only for including all variables. Select quantitative variables for PCA
+laca_metab_q <- laca_metab[,5:16]
 
 # We have to put row.names with 
-row.names(laca_metab2) <- make.names(na.omit(laca_metab)$`Strain number`)
+row.names(laca_metab_q) <- make.names(laca_metab$`Strain number`)
 
 # Calculate PCA. Important to scale the variables ("scale. = TRUE")
-pca_res <- prcomp(laca_metab2, scale. = TRUE)
+pca_res <- prcomp(laca_metab_q, scale. = TRUE)
 
 # First simple plot.
 ggplot2::autoplot(pca_res)
