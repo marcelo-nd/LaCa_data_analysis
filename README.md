@@ -1,4 +1,5 @@
-# LaCa_data_analysis
+# LaCa collection data analyses
+
  Data analyses for the LaCa bacterial collection.
  
  Includes:
