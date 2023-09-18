@@ -4,5 +4,5 @@
  
  Includes:
  
- - Volunteer nasal bacterial diversity analyses-
+ - Volunteer nasal bacterial diversity analyses.
  - Metabolic screening analyses.
