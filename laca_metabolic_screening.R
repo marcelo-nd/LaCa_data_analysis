@@ -11,7 +11,6 @@ laca_metab <- readxl::read_excel("C:/Users/Marcelo/OneDrive - UT Cloud/1_Postdoc
 # Remove the rows with missing values.
 laca_metab <- na.omit(laca_metab)
 
-
 # Run to select only "Growth" variables.
 laca_metab2 <- dplyr::select(laca_metab, "Strain number", "Species", "name", dplyr::contains("Growth"))
 # Select quantitative variables for PCA
@@ -20,7 +19,7 @@ laca_metab_q <- laca_metab2[,4:8]
 # Run to select only "Activities" variables.
 laca_metab2 <- dplyr::select(laca_metab, -dplyr::contains("Growth"))
 # Select quantitative variables for PCA
-laca_metab_q <- laca_metab2[,5:11]
+laca_metab_q <- laca_metab2[,4:16]
 
 
 # Run only for including all variables. Select quantitative variables for PCA
@@ -45,26 +44,28 @@ p2 <- ggplot2::autoplot(pca_res, data = na.omit(laca_metab), colour = 'volunteer
 
 plotly::ggplotly(p2)
 
-# Graph with dots, labels and axis. Dots couloured by bacterial species
+# Graph with dots, labels and axis. Dots coloured by bacterial species
 p3 <- ggplot2::autoplot(pca_res, data = na.omit(laca_metab), colour = 'Species', loadings = TRUE, loadings.colour = "#0072B2",
                        loadings.label = TRUE, loadings.label.size = 3, loadings.label.colour = "#0072B2", label = TRUE)
 
 plotly::ggplotly(p3)
 
-# Graph without dots, only labels and axis. Dots couloured by bacterial species
-p4 <- ggplot2::autoplot(pca_res, data = na.omit(laca_metab), colour = 'Species', loadings = TRUE, loadings.colour = "#0072B2",
+# Graph without dots, only labels and axis. Dots colored by bacterial species
+p4 <- ggplot2::autoplot(pca_res, data = laca_metab, colour = 'Species', loadings = TRUE, loadings.colour = "#0072B2",
                         loadings.label = TRUE, loadings.label.size = 3, loadings.label.colour = "#0072B2", label = TRUE, shape = FALSE)
 
 plotly::ggplotly(p4)
 
-# Graph with only dots, no labels and axis. Dots couloured by bacterial species
+plot(p4)
+
+# Graph with only dots, no labels and axis. Dots colored by bacterial species
 p5 <- ggplot2::autoplot(pca_res, data = na.omit(laca_metab), colour = 'Species', loadings = TRUE, loadings.colour = "#0072B2",
                         loadings.label = TRUE, loadings.label.size = 3, loadings.label.colour = "#0072B2", label = FALSE, shape = TRUE)
 
 plotly::ggplotly(p5)
 plot(p5)
 
-# Graph with only dots, no labels and axis. Dots couloured by bacterial species
+# Graph with only dots, no labels and axis. Dots colored by bacterial species
 p6 <- ggplot2::autoplot(pca_res, data = na.omit(laca_metab), colour = 'volunteer', loadings = TRUE, loadings.colour = "#0072B2",
                         loadings.label = TRUE, loadings.label.size = 3, loadings.label.colour = "#0072B2", label = FALSE, shape = TRUE)
 
