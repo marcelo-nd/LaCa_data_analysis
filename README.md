@@ -1,2 +1,8 @@
-# LaCa_data_analysis
- Several analyses for the LaCa bacterial collection.
+# LaCa collection data analyses
+
+ Data analyses for the LaCa bacterial collection.
+ 
+ Includes:
+ 
+ - Volunteer nasal bacterial diversity analyses.
+ - Metabolic screening analyses.
